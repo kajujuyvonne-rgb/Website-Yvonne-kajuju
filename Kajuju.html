@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Yvonne Kajuju - MICS 508</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial;
+    background:white;
+}
+
+/* HEADER */
+.header {
+    background:purple;
+    color:white;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header-left {
+    font-size:14px;
+}
+
+/* Login */
+.login-box input {
+    padding:5px;
+    margin:2px;
+}
+.login-box button {
+    background:gold;
+    border:none;
+    padding:5px 10px;
+}
+
+/* NAV */
+.nav {
+    background:gold;
+    padding:10px;
+    text-align:center;
+}
+.nav button {
+    margin:5px;
+    padding:10px;
+    border:none;
+    background:purple;
+    color:white;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://images.unsplash.com/photo-1498050108023-c5249f4df085");
+    background-size:cover;
+    background-position:center;
+    color:white;
+    padding:80px 20px;
+    text-align:center;
+}
+
+/* Sections */
+.section {
+    display:none;
+    padding:20px;
+}
+.active {
+    display:block;
+}
+
+/* Forms */
+input, textarea {
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+}
+
+/* Cards */
+.card {
+    border:1px solid #ddd;
+    padding:10px;
+    margin:10px 0;
+}
+
+/* Background section */
+.bg-section {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("https://images.unsplash.com/photo-1555066931-4365d14bab8c");
+    background-size:cover;
+    color:white;
+    padding:40px;
+    margin-top:20px;
+}
+</style>
+
+<script>
+
+// SWITCH PAGES
+function showPage(id){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+// LOGIN
+function login(){
+    let email = document.querySelector('.login-box input[type="text"]').value;
+
+    if(email === ""){
+        alert("Enter email");
+        return;
+    }
+
+    localStorage.setItem("userEmail", email);
+    loadUser();
+    showPage('home');
+}
+
+// LOAD USER INFO
+function loadUser(){
+    let user = localStorage.getItem("userEmail");
+
+    if(user){
+        document.getElementById("welcomeBox").innerHTML =
+        "<div class='card'><b>Logged in as:</b> "+user+"</div>";
+
+        let lang = navigator.language;
+        document.getElementById("welcomeBox").innerHTML +=
+        "<div class='card'>Language: "+lang+"</div>";
+    }
+}
+
+// AUTO LOGIN
+window.onload = function(){
+    if(localStorage.getItem("userEmail")){
+        loadUser();
+    }
+}
+
+// REGISTER NOW OPENS GOOGLE FORM
+function goRegister(){
+    window.open("https://docs.google.com/forms/d/e/1FAIpQLSctkwlGYFFdd2OlTmiu8CYAwX1xF8vht_Y3CwugtK-gxrmOEA/viewform", "_blank");
+}
+
+// CREATE POST
+function createPost(){
+    let title = document.getElementById("postTitle").value;
+    let content = document.getElementById("postContent").value;
+
+    document.getElementById("posts").innerHTML +=
+        "<div class='card'><h4>"+title+"</h4><p>"+content+"</p></div>";
+}
+
+// REVIEW
+function submitReview(){
+    let review = document.getElementById("review").value;
+
+    document.getElementById("reviews").innerHTML +=
+        "<div class='card'>"+review+"</div>";
+}
+
+// CONTACT FORM
+function sendMessage(){
+    document.getElementById("contactStatus").innerText = "Message Sent!";
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-left">
+        <b>Yvonne Kajuju</b><br>
+        ISK-3-2265-2/2026<br>
+        MICS 508<br>
+        Lecturer: Dr David Munene
+    </div>
+
+    <div class="login-box">
+        <input type="text" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="goRegister()">Register</button>
+    <button onclick="showPage('qa')">Q&A</button>
+    <button onclick="showPage('downloads')">Downloads</button>
+</div>
+
+<!-- HOME -->
+<div id="home" class="section active">
+
+<div class="hero">
+    <h1>Web Design & Development</h1>
+    <p>Interactive, Modern and Responsive Systems</p>
+</div>
+
+<div id="welcomeBox"></div>
+
+<div class="bg-section">
+    <h3>Learn Web Design</h3>
+    <p>Explore HTML, CSS, JavaScript and modern frameworks.</p>
+
+    <h4>YouTube Tutorials</h4>
+
+    <div style="margin-top:10px;">
+        <a style="color:white; display:block; margin:5px 0;" href="https://www.youtube.com/watch?v=UB1O30fR-EE" target="_blank">▶ HTML Basics</a>
+        <a style="color:white; display:block; margin:5px 0;" href="https://www.youtube.com/watch?v=PkZNo7MFNFg" target="_blank">▶ JavaScript Full Course</a>
+        <a style="color:white; display:block; margin:5px 0;" href="https://www.youtube.com/watch?v=yfoY53QXEnI" target="_blank">▶ CSS Crash Course</a>
+        <a style="color:white; display:block; margin:5px 0;" href="https://www.youtube.com/watch?v=3JluqTojuME" target="_blank">▶ Responsive Web Design</a>
+        <a style="color:white; display:block; margin:5px 0;" href="https://www.youtube.com/watch?v=Q33KBiDriJY" target="_blank">▶ HTML Forms Tutorial</a>
+        <a style="color:white; display:block; margin:5px 0;" href="https://www.youtube.com/watch?v=Ke90Tje7VS0" target="_blank">▶ React JS Introduction</a>
+    </div>
+
+</div>
+
+<h3>Contact Form</h3>
+<input placeholder="Your Name">
+<input placeholder="Your Email">
+<textarea placeholder="Message"></textarea>
+<button onclick="sendMessage()">Send</button>
+
+<p id="contactStatus" style="color:green;"></p>
+
+</div>
+
+<!-- REGISTRATION -->
+<div id="registerDetails" class="section"></div>
+
+<!-- Q&A -->
+<div id="qa" class="section">
+
+<h2>Q&A Section</h2>
+
+<div class="card"><b>1.</b> Under what conditions should a system use RDBMS vs NoSQL?</div>
+<div class="card"><b>2.</b> How does IA improve navigation and SEO?</div>
+<div class="card"><b>3.</b> How do Semantic HTML help search engines?</div>
+<div class="card"><b>4.</b> Difference between headless and traditional CMS?</div>
+<div class="card"><b>5.</b> How does GraphQL solve data fetching issues?</div>
+<div class="card"><b>6.</b> How does RBAC protect systems?</div>
+<div class="card"><b>7.</b> GDPR compliance practices?</div>
+<div class="card"><b>8.</b> Why cloud storage over BLOBs?</div>
+<div class="card"><b>9.</b> Prevent dashboard lag?</div>
+<div class="card"><b>10.</b> How caching improves speed?</div>
+
+</div>
+
+<!-- DOWNLOADS -->
+<div id="downloads" class="section">
+
+<h2>Downloads</h2>
+
+<div class="card">
+<a href="file:///C:/Users/HomePC/Downloads/Module%201-Intro-to-Web%20Design-in-IM.pdf" target="_blank">
+📥 Module 1 - Intro to Web Design
+</a>
+</div>
+
+<div class="card">
+<a href="file:///C:/Users/HomePC/Downloads/Module2-Web%20Design%20Fundamentals.pdf" target="_blank">
+📥 Module 2 - Web Design Fundamentals
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
